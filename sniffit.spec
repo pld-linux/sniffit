@@ -37,7 +37,7 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_bindir}
 install -s sniffit $RPM_BUILD_ROOT%{_bindir}
 
-gzip -9nf 	PLUGIN-HOWTO README.FIRST BETA-TESTING \
+gzip -9nf  	PLUGIN-HOWTO README.FIRST BETA-TESTING \
 		HISTORY sample_config_file sniffit-FAQ
 
 %clean
