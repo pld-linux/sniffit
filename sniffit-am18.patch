@@ -1,0 +1,111 @@
+diff -urN sniffit.0.3.7.beta.orig/libpcap/aclocal.m4 sniffit.0.3.7.beta.new/libpcap/aclocal.m4
+--- sniffit.0.3.7.beta.orig/libpcap/aclocal.m4	1998-07-16 18:17:10.000000000 +0200
++++ sniffit.0.3.7.beta.new/libpcap/aclocal.m4	2004-06-12 21:47:28.452462856 +0200
+@@ -42,7 +42,7 @@
+ dnl	ac_cv_lbl_gcc_vers
+ dnl	LBL_CFLAGS
+ dnl
+-AC_DEFUN(AC_LBL_C_INIT,
++AC_DEFUN([AC_LBL_C_INIT],
+     [AC_PREREQ(2.12)
+     AC_BEFORE([$0], [AC_PROG_CC])
+     AC_BEFORE([$0], [AC_LBL_FIXINCLUDES])
+@@ -171,7 +171,7 @@
+ dnl	LIBS
+ dnl	LBL_LIBS
+ dnl
+-AC_DEFUN(AC_LBL_LIBPCAP,
++AC_DEFUN([AC_LBL_LIBPCAP],
+     [AC_REQUIRE([AC_LBL_LIBRARY_NET])
+     dnl
+     dnl save a copy before locating libpcap.a
+@@ -239,7 +239,7 @@
+ dnl	RETSIGTYPE (defined)
+ dnl	RETSIGVAL (defined)
+ dnl
+-AC_DEFUN(AC_LBL_TYPE_SIGNAL,
++AC_DEFUN([AC_LBL_TYPE_SIGNAL],
+     [AC_BEFORE([$0], [AC_LBL_LIBPCAP])
+     AC_TYPE_SIGNAL
+     if test "$ac_cv_type_signal" = void ; then
+@@ -269,7 +269,7 @@
+ dnl
+ dnl	AC_LBL_FIXINCLUDES
+ dnl
+-AC_DEFUN(AC_LBL_FIXINCLUDES,
++AC_DEFUN([AC_LBL_FIXINCLUDES],
+     [if test "$GCC" = yes ; then
+ 	    AC_MSG_CHECKING(for ANSI ioctl definitions)
+ 	    AC_CACHE_VAL(ac_cv_lbl_gcc_fixincludes,
+@@ -315,7 +315,7 @@
+ dnl	$2 (yacc appended)
+ dnl	$3 (optional flex and bison -P prefix)
+ dnl
+-AC_DEFUN(AC_LBL_LEX_AND_YACC,
++AC_DEFUN([AC_LBL_LEX_AND_YACC],
+     [AC_ARG_WITH(flex, [  --without-flex          don't use flex])
+     AC_ARG_WITH(bison, [  --without-bison         don't use bison])
+     if test "$with_flex" = no ; then
+@@ -368,7 +368,7 @@
+ dnl
+ dnl	DECLWAITSTATUS (defined)
+ dnl
+-AC_DEFUN(AC_LBL_UNION_WAIT,
++AC_DEFUN([AC_LBL_UNION_WAIT],
+     [AC_MSG_CHECKING(if union wait is used)
+     AC_CACHE_VAL(ac_cv_lbl_union_wait,
+ 	AC_TRY_COMPILE([
+@@ -397,7 +397,7 @@
+ dnl
+ dnl	HAVE_SOCKADDR_SA_LEN (defined)
+ dnl
+-AC_DEFUN(AC_LBL_SOCKADDR_SA_LEN,
++AC_DEFUN([AC_LBL_SOCKADDR_SA_LEN],
+     [AC_MSG_CHECKING(if sockaddr struct has sa_len member)
+     AC_CACHE_VAL(ac_cv_lbl_sockaddr_has_sa_len,
+ 	AC_TRY_COMPILE([
+@@ -422,7 +422,7 @@
+ dnl
+ dnl	ac_cv_lbl_have_run_path (yes or no)
+ dnl
+-AC_DEFUN(AC_LBL_HAVE_RUN_PATH,
++AC_DEFUN([AC_LBL_HAVE_RUN_PATH],
+     [AC_MSG_CHECKING(for ${CC-cc} -R)
+     AC_CACHE_VAL(ac_cv_lbl_have_run_path,
+ 	[echo 'main(){}' > conftest.c
+@@ -448,7 +448,7 @@
+ dnl	int32_t (defined)
+ dnl	u_int32_t (defined)
+ dnl
+-AC_DEFUN(AC_LBL_CHECK_TYPE,
++AC_DEFUN([AC_LBL_CHECK_TYPE],
+     [AC_MSG_CHECKING(for $1 using $CC)
+     AC_CACHE_VAL(ac_cv_lbl_have_$1,
+ 	AC_TRY_COMPILE([
+@@ -477,7 +477,7 @@
+ dnl
+ dnl	LBL_ALIGN (DEFINED)
+ dnl
+-AC_DEFUN(AC_LBL_UNALIGNED_ACCESS,
++AC_DEFUN([AC_LBL_UNALIGNED_ACCESS],
+     [AC_MSG_CHECKING(if unaligned accesses fail)
+     AC_CACHE_VAL(ac_cv_lbl_unaligned_fail,
+ 	[case "$target_cpu" in
+@@ -550,7 +550,7 @@
+ dnl	HAVE_OS_PROTO_H (defined)
+ dnl	os-proto.h (symlinked)
+ dnl
+-AC_DEFUN(AC_LBL_DEVEL,
++AC_DEFUN([AC_LBL_DEVEL],
+     [rm -f os-proto.h
+     if test "${LBL_CFLAGS+set}" = set; then
+ 	    $1="$$1 ${LBL_CFLAGS}"
+@@ -680,7 +680,7 @@
+ dnl statically and happen to have a libresolv.a lying around (and no
+ dnl libnsl.a).
+ dnl
+-AC_DEFUN(AC_LBL_LIBRARY_NET, [
++AC_DEFUN([AC_LBL_LIBRARY_NET], [
+     # Most operating systems have gethostbyname() in the default searched
+     # libraries (i.e. libc):
+     AC_CHECK_FUNC(gethostbyname, ,
