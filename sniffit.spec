@@ -9,7 +9,7 @@ Epoch:		1
 License:	distributable
 Group:		Networking/Utilities
 Source0:	http://reptile.rug.ac.be/~coder/sniffit/files/%{name}.%{version}.beta.tar.gz
-# Source0-md5: 2697cc18878480199fe6db1e61134d5a
+# Source0-md5:	2697cc18878480199fe6db1e61134d5a
 Patch0:		%{name}-fixes.patch
 Patch1:		%{name}-gcc33.patch
 URL:		http://reptile.rug.ac.be/~coder/sniffit/sniffit.html
@@ -37,8 +37,8 @@ jest w stanie podaæ Ci bardzo wiele informacji o tych pakietach (SEQ,
 ACK, TTL, Okno, ...) a tak¿e ich zawarto¶æ w ró¿nych formatach
 (szesnastkowo lub w czystej postaci, ...).
 
-%description -l pt_BR 
-Sniffit é um analisador de redes. Ele monitora o tráfego de rede e 
+%description -l pt_BR
+Sniffit é um analisador de redes. Ele monitora o tráfego de rede e
 produz uma análise compreensível por humanos.
 
 %prep
