@@ -32,7 +32,7 @@ a tak¿e ich zawarto¶æ w ró¿nych formatach (szesnastkowo lub w czystej postaci,
 %build
 LDFLAGS="-s"; export LDFLAGS
 %configure
-make
+%{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
