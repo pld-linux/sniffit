@@ -1,5 +1,5 @@
 Summary:	Program for demonstrating the unsafeness of TCP
-Summary(es):	A network protocol analyzer
+Summary(es):	Programa para demonstrar la inseguridad de TCP
 Summary(pl):	Program do nas³uchu po³±czeñ TCP/UDP/ICMP
 Summary(pt_BR):	Um analisador de protocolos de rede
 Name:		sniffit
@@ -22,8 +22,14 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %description
 Sniffit is a packet sniffer for TCP/UDP/ICMP packets. Sniffit is able
 to give you very detailed technical info on these packets (SEQ, ACK,
-TTL, Window, ...) but also packet contence in different formats (hex
+TTL, Window, ...) but also packet contents in different formats (hex
 or plain text, ...).
+
+%description -l es
+Sniffit es un sniffer de paquetes TCP/UDP/ICMP. Es capaz de dar
+información técnica muy detallada sobre esos paquetes (SEQ, ACK, TTL,
+ventana, ...), igual que su contenido en varios formatos (hex, texto
+plano, ...).
 
 %description -l pl
 Sniffit jest programem do pods³uchu pakietów TCP/UDP/ICMP. Sniffit
