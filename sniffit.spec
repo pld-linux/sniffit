@@ -11,7 +11,7 @@ Patch:		sniffit-fixes.patch
 URL:		http://reptile.rug.ac.be/~coder/sniffit/sniffit.html
 Buildrequires:	ncurses-devel >= 5.0
 Buildrequires:	libpcap-devel
-BuildRoot:	/tmp/%{name}-%{version}-root
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 Sniffit is a packet sniffer for TCP/UDP/ICMP packets. Sniffit is able to
