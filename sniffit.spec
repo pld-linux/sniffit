@@ -5,25 +5,30 @@ Version:	0.3.7
 Release:	4
 License:	Free
 Group:		Networking/Utilities
+Group(de):	Netzwerkwesen/Werkzeuge
+Group(es):	Red/Utilitarios
 Group(pl):	Sieciowe/Narzêdzia
-Source:		http://reptile.rug.ac.be/~coder/sniffit/files/%{name}.%{version}.beta.tar.gz 
-Patch:		sniffit-fixes.patch
+Group(pt_BR):	Rede/Utilitários
+Source0:	http://reptile.rug.ac.be/~coder/sniffit/files/%{name}.%{version}.beta.tar.gz
+Patch0:		%{name}-fixes.patch
 URL:		http://reptile.rug.ac.be/~coder/sniffit/sniffit.html
-Buildrequires:	ncurses-devel >= 5.0
-Buildrequires:	libpcap-devel
+BuildRequires:	ncurses-devel >= 5.0
+BuildRequires:	libpcap-devel
+BuildRequires:	autoconf
+BuildRequires:	automake
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-Sniffit is a packet sniffer for TCP/UDP/ICMP packets. Sniffit is able to
-give you very detailed technical info on these packets (SEQ, ACK, TTL,
-Window, ...) but also packet contence in different formats (hex or plain
-text, ...).
+Sniffit is a packet sniffer for TCP/UDP/ICMP packets. Sniffit is able
+to give you very detailed technical info on these packets (SEQ, ACK,
+TTL, Window, ...) but also packet contence in different formats (hex
+or plain text, ...).
 
 %description -l pl
-Sniffit jest programem do pods³uchu pakietów TCP/UDP/ICMP. Sniffit jest w stanie
-podaæ Ci bardzo wiele informacji o tych pakietach (SEQ, ACK, TTL, Okno, ...)
-a tak¿e ich zawarto¶æ w ró¿nych formatach (szesnastkowo lub w czystej postaci,
-...).
+Sniffit jest programem do pods³uchu pakietów TCP/UDP/ICMP. Sniffit
+jest w stanie podaæ Ci bardzo wiele informacji o tych pakietach (SEQ,
+ACK, TTL, Okno, ...) a tak¿e ich zawarto¶æ w ró¿nych formatach
+(szesnastkowo lub w czystej postaci, ...).
 
 %prep
 %setup -q -n %{name}.%{version}.beta
