@@ -25,12 +25,6 @@ to give you very detailed technical info on these packets (SEQ, ACK,
 TTL, Window, ...) but also packet contence in different formats (hex
 or plain text, ...).
 
-%description -l es
-Sniffit is a robust non-commercial network protocol analyzer or packet
-sniffer. A packet sniffer basically listens to network traffic and
-produces analysis based on the traffic and/or translates packets into
-some level of human readable form.
-
 %description -l pl
 Sniffit jest programem do pods³uchu pakietów TCP/UDP/ICMP. Sniffit
 jest w stanie podaæ Ci bardzo wiele informacji o tych pakietach (SEQ,
