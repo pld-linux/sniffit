@@ -1,0 +1,26 @@
+diff -Nru sniffit.0.3.7.beta/Makefile.in sniffit.0.3.7.beta.new/Makefile.in
+--- sniffit.0.3.7.beta/Makefile.in	Thu Jul 16 18:17:10 1998
++++ sniffit.0.3.7.beta.new/Makefile.in	Mon Jan 17 18:49:38 2000
+@@ -10,10 +10,10 @@
+ LIBS       = @LIBS@
+ DEFS	   = @DEFS@
+ OS_OPT     = @OS_OPT@
+-OBJ_FLAG   = -w -O2 -c
+-OBJ_OPT    = -I./libpcap -L./libpcap
+-EXE_FLAG   = -w -O2 -o sniffit
+-EXE_OPT    = -I./libpcap -L./libpcap -lpcap
++OBJ_FLAG   = -w $(RPM_OPT_FLAGS) -c
++OBJ_OPT    = 
++EXE_FLAG   = -w $(RPM_OPT_FLAGS) -o sniffit
++EXE_OPT    = -lpcap
+ EXE_OBJ    = sn_packets.o sn_generation.o sn_interface.o sn_cfgfile.o \
+              sn_logfile.o sn_resolv.o
+ DEP_FILES  = sn_config.h ./libpcap/pcap.h sn_data.h sn_defines.h sn_plugins.h \
+@@ -26,7 +26,6 @@
+ 	@echo "Succesfull compilation..."
+ 
+ sniffit: $(SNIFFIT) $(DEP_FILES)
+-	cd libpcap; make; cd ..
+ 	$(CC) $(EXE_FLAG) $(SNIFFIT) $(EXE_OBJ) $(EXE_OPT) $(LIBS) $(DEFS) $(OS_OPT) 
+ 	strip sniffit
+ 
