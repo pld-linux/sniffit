@@ -4,7 +4,7 @@ Summary(pl):	Program do nas³uchu po³±czeñ TCP/UDP/ICMP
 Summary(pt_BR):	Um analisador de protocolos de rede
 Name:		sniffit
 Version:	0.3.7
-Release:	7
+Release:	8
 Epoch:		1
 License:	distributable
 Group:		Networking/Utilities
@@ -12,6 +12,7 @@ Source0:	http://reptile.rug.ac.be/~coder/sniffit/files/%{name}.%{version}.beta.t
 # Source0-md5:	2697cc18878480199fe6db1e61134d5a
 Patch0:		%{name}-fixes.patch
 Patch1:		%{name}-gcc33.patch
+Patch2:		%{name}-am18.patch
 URL:		http://reptile.rug.ac.be/~coder/sniffit/sniffit.html
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -45,10 +46,12 @@ produz uma análise compreensível por humanos.
 %setup -q -n %{name}.%{version}.beta
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
 cd libpcap
 cp -f /usr/share/automake/config.sub .
+mv -f aclocal.m4 acinclude.m4
 %{__aclocal}
 %{__autoconf}
 cd ..
