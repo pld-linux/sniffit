@@ -2,7 +2,7 @@ Summary:	Program for demonstrating the unsafeness of TCP
 Summary(pl):	Program do nas³uchu po³±czeñ TCP/UDP/ICMP
 Name:		sniffit
 Version:	0.3.7
-Release:	2
+Release:	3
 Copyright:	Free
 Group:		Networking/Utilities
 Group(pl):	Sieciowe/Narzêdzia
