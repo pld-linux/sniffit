@@ -46,10 +46,10 @@ produz uma análise compreensível por humanos.
 %build
 (cd libpcap
 aclocal
-autoconf
+%{__autoconf}
 )
 aclocal
-autoconf
+%{__autoconf}
 %configure
 %{__make}
 
