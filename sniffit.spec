@@ -4,7 +4,7 @@ Summary(pl):	Program do nas³uchu po³±czeñ TCP/UDP/ICMP
 Summary(pt_BR):	Um analisador de protocolos de rede
 Name:		sniffit
 Version:	0.3.7
-Release:	8
+Release:	9
 Epoch:		1
 License:	distributable
 Group:		Networking/Utilities
