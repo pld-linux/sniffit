@@ -30,7 +30,6 @@ a tak¿e ich zawarto¶æ w ró¿nych formatach (szesnastkowo lub w czystej postaci,
 %patch -p1
 
 %build
-LDFLAGS="-s"; export LDFLAGS
 %configure
 %{__make}
 
@@ -38,13 +37,12 @@ LDFLAGS="-s"; export LDFLAGS
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_bindir},%{_mandir}/man{5,8}}
 
-install -s sniffit $RPM_BUILD_ROOT%{_bindir}
+install sniffit $RPM_BUILD_ROOT%{_bindir}
 
 install sniffit.5 $RPM_BUILD_ROOT%{_mandir}/man5
 install sniffit.8 $RPM_BUILD_ROOT%{_mandir}/man8
 
-gzip -9nf $RPM_BUILD_ROOT%{_mandir}/man?/* \
-	PLUGIN-HOWTO README.FIRST BETA-TESTING \
+gzip -9nf PLUGIN-HOWTO README.FIRST BETA-TESTING \
 	HISTORY sample_config_file sniffit-FAQ
 
 %clean
