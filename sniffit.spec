@@ -6,7 +6,7 @@ Name:		sniffit
 Version:	0.3.7
 Release:	5
 Epoch:		1
-License:	distrubutable
+License:	distributable
 Group:		Networking/Utilities
 Group(de):	Netzwerkwesen/Werkzeuge
 Group(es):	Red/Utilitarios
@@ -47,10 +47,10 @@ tráfego de rede e produz uma análise compreensível por humanos.
 %patch -p1
 
 %build
-cd libpcap
-	aclocal
-	autoconf
-cd ..
+(cd libpcap
+aclocal
+autoconf
+)
 aclocal
 autoconf
 %configure
