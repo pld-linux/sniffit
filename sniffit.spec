@@ -7,7 +7,10 @@ Copyright:	Free
 Group:		Networking/Utilities
 Group(pl):	Sieciowe/Narzêdzia
 Source:		http://reptile.rug.ac.be/~coder/sniffit/files/%{name}.%{version}.beta.tar.gz 
+Patch:		sniffit-fixes.patch
 URL:		http://reptile.rug.ac.be/~coder/sniffit/sniffit.html
+Buildrequires:	ncurses-devel >= 5.0
+Buildrequires:	libpcap-devel
 BuildRoot:	/tmp/%{name}-%{version}-root
 
 %description
@@ -24,6 +27,7 @@ a tak¿e ich zawarto¶æ w ró¿nych formatach (szesnastkowo lub w czystej postaci,
 
 %prep
 %setup -q -n %{name}.%{version}.beta
+%patch -p1
 
 %build
 LDFLAGS="-s"; export LDFLAGS
@@ -32,11 +36,15 @@ make
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_bindir}
+install -d $RPM_BUILD_ROOT{%{_bindir},%{_mandir}/man{5,8}}
 
 install -s sniffit $RPM_BUILD_ROOT%{_bindir}
 
-gzip -9nf PLUGIN-HOWTO README.FIRST BETA-TESTING \
+install sniffit.5 $RPM_BUILD_ROOT%{_mandir}/man5
+install sniffit.8 $RPM_BUILD_ROOT%{_mandir}/man8
+
+gzip -9nf $RPM_BUILD_ROOT%{_mandir}/man?/* \
+	PLUGIN-HOWTO README.FIRST BETA-TESTING \
 	HISTORY sample_config_file sniffit-FAQ
 
 %clean
@@ -45,5 +53,5 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc *.gz
-
 %attr(755,root,root) %{_bindir}/*
+%{_mandir}/man?/*
