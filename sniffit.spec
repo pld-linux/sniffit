@@ -11,6 +11,7 @@ Group:		Networking/Utilities
 Source0:	http://reptile.rug.ac.be/~coder/sniffit/files/%{name}.%{version}.beta.tar.gz
 # Source0-md5: 2697cc18878480199fe6db1e61134d5a
 Patch0:		%{name}-fixes.patch
+Patch1:		%{name}-gcc33.patch
 URL:		http://reptile.rug.ac.be/~coder/sniffit/sniffit.html
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -42,7 +43,8 @@ produz uma análise compreensível por humanos.
 
 %prep
 %setup -q -n %{name}.%{version}.beta
-%patch -p1
+%patch0 -p1
+%patch1 -p1
 
 %build
 (cd libpcap
