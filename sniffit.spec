@@ -47,10 +47,13 @@ produz uma análise compreensível por humanos.
 %patch1 -p1
 
 %build
-(cd libpcap
+cd libpcap
+cp -f /usr/share/automake/config.sub .
 %{__aclocal}
 %{__autoconf}
-)
+cd ..
+
+cp -f /usr/share/automake/config.sub .
 %{__aclocal}
 %{__autoconf}
 %configure
