@@ -37,7 +37,7 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_bindir}
 install -s sniffit $RPM_BUILD_ROOT%{_bindir}
 
-gzip -9fn	PLUGIN-HOWTO README.FIRST BETA-TESTING \
+gzip -9nf 	PLUGIN-HOWTO README.FIRST BETA-TESTING \
 		HISTORY sample_config_file sniffit-FAQ
 
 %clean
@@ -48,18 +48,3 @@ rm -rf $RPM_BUILD_ROOT
 %doc *.gz
 
 %attr(755,root,root) %{_bindir}/*
-
-%changelog
-* Thu Jul 22 1999 Wojtek ¦lusarczyk <wojtek@shadow.eu.org>
-- build for 1.3 PLD Linux 
-
-* Wed Oct 21 1998 Wojtek ¦lusarczyk <wojtek@shadow.eu.org>
-  [0.3.7-1d]
-- build against 1.1 PLD,
-- translation modified for pl,
-- build from non root's account,
-- major changes (follow the Linux PLD policy).
-
-* Wed Jul 22 1998 Arkadiusz Mi¶kiewicz <misiek@misiek.eu.org>
-- updated to 0.3.7.beta
-- removed old patch
