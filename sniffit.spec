@@ -8,10 +8,6 @@ Release:	5
 Epoch:		1
 License:	distributable
 Group:		Networking/Utilities
-Group(de):	Netzwerkwesen/Werkzeuge
-Group(es):	Red/Utilitarios
-Group(pl):	Sieciowe/Narzêdzia
-Group(pt_BR):	Rede/Utilitários
 Source0:	http://reptile.rug.ac.be/~coder/sniffit/files/%{name}.%{version}.beta.tar.gz
 Patch0:		%{name}-fixes.patch
 URL:		http://reptile.rug.ac.be/~coder/sniffit/sniffit.html
