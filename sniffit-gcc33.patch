@@ -1,0 +1,11 @@
+--- sniffit.0.3.7.beta/sn_structs.h~	1998-07-16 16:17:10.000000000 +0000
++++ sniffit.0.3.7.beta/sn_structs.h	2003-07-04 13:41:57.000000000 +0000
+@@ -67,7 +67,7 @@
+ struct snif_mask                                         /* struct for mask */
+   {
+   _32_bit source_ip, destination_ip;
+-  _32_bit short source_port, destination_port;
++  _32_bit source_port, destination_port;
+   };
+ 
+ /* (packet generation) */
