@@ -6,8 +6,8 @@ Release:	2
 Copyright:	Free
 Group:		Networking/Utilities
 Group(pl):	Sieciowe/Narzêdzia
-Url:		http://reptile.rug.ac.be/~coder/sniffit/sniffit.html
-Source:		%{name}.%{version}.beta.tar.gz 
+Source:		http://reptile.rug.ac.be/~coder/sniffit/files/%{name}.%{version}.beta.tar.gz 
+URL:		http://reptile.rug.ac.be/~coder/sniffit/sniffit.html
 BuildRoot:	/tmp/%{name}-%{version}-root
 
 %description
@@ -26,19 +26,18 @@ a tak¿e ich zawarto¶æ w ró¿nych formatach (szesnastkowo lub w czystej postaci,
 %setup -q -n %{name}.%{version}.beta
 
 %build
-CFLAGS=$RPM_OPT_FLAGS LDFLAGS=-s \
-./configure --prefix=%{_prefix}
-
-make OBJ_FLAG="-w $RPM_OPT_FLAGS -c"
+LDFLAGS="-s"; export LDFLAGS
+%configure
+make
 
 %install
 rm -rf $RPM_BUILD_ROOT
-
 install -d $RPM_BUILD_ROOT%{_bindir}
+
 install -s sniffit $RPM_BUILD_ROOT%{_bindir}
 
-gzip -9nf  	PLUGIN-HOWTO README.FIRST BETA-TESTING \
-		HISTORY sample_config_file sniffit-FAQ
+gzip -9nf PLUGIN-HOWTO README.FIRST BETA-TESTING \
+	HISTORY sample_config_file sniffit-FAQ
 
 %clean
 rm -rf $RPM_BUILD_ROOT
