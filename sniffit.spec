@@ -62,14 +62,12 @@ install sniffit $RPM_BUILD_ROOT%{_bindir}
 install sniffit.5 $RPM_BUILD_ROOT%{_mandir}/man5
 install sniffit.8 $RPM_BUILD_ROOT%{_mandir}/man8
 
-gzip -9nf PLUGIN-HOWTO README.FIRST BETA-TESTING \
-	HISTORY sample_config_file sniffit-FAQ
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc *.gz
+%doc PLUGIN-HOWTO README.FIRST BETA-TESTING
+%doc HISTORY sample_config_file sniffit-FAQ
 %attr(755,root,root) %{_bindir}/*
 %{_mandir}/man?/*
