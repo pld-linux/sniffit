@@ -35,8 +35,9 @@ jest w stanie podaæ Ci bardzo wiele informacji o tych pakietach (SEQ,
 ACK, TTL, Okno, ...) a tak¿e ich zawarto¶æ w ró¿nych formatach
 (szesnastkowo lub w czystej postaci, ...).
 
-description -l pt_BR Sniffit é um analisador de redes. Ele monitora o
-tráfego de rede e produz uma análise compreensível por humanos.
+%description -l pt_BR 
+Sniffit é um analisador de redes. Ele monitora o tráfego de rede e 
+produz uma análise compreensível por humanos.
 
 %prep
 %setup -q -n %{name}.%{version}.beta
