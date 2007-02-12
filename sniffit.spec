@@ -1,7 +1,7 @@
 Summary:	Program for demonstrating the unsafeness of TCP
-Summary(es):	Programa para demonstrar la inseguridad de TCP
-Summary(pl):	Program do nas³uchu po³±czeñ TCP/UDP/ICMP
-Summary(pt_BR):	Um analisador de protocolos de rede
+Summary(es.UTF-8):   Programa para demonstrar la inseguridad de TCP
+Summary(pl.UTF-8):   Program do nasÅ‚uchu poÅ‚Ä…czeÅ„ TCP/UDP/ICMP
+Summary(pt_BR.UTF-8):   Um analisador de protocolos de rede
 Name:		sniffit
 Version:	0.3.7
 Release:	9
@@ -26,21 +26,21 @@ to give you very detailed technical info on these packets (SEQ, ACK,
 TTL, Window, ...) but also packet contents in different formats (hex
 or plain text, ...).
 
-%description -l es
+%description -l es.UTF-8
 Sniffit es un sniffer de paquetes TCP/UDP/ICMP. Es capaz de dar
-información técnica muy detallada sobre esos paquetes (SEQ, ACK, TTL,
+informaciÃ³n tÃ©cnica muy detallada sobre esos paquetes (SEQ, ACK, TTL,
 ventana, ...), igual que su contenido en varios formatos (hex, texto
 plano, ...).
 
-%description -l pl
-Sniffit jest programem do pods³uchu pakietów TCP/UDP/ICMP. Sniffit
-jest w stanie podaæ Ci bardzo wiele informacji o tych pakietach (SEQ,
-ACK, TTL, Okno, ...) a tak¿e ich zawarto¶æ w ró¿nych formatach
+%description -l pl.UTF-8
+Sniffit jest programem do podsÅ‚uchu pakietÃ³w TCP/UDP/ICMP. Sniffit
+jest w stanie podaÄ‡ Ci bardzo wiele informacji o tych pakietach (SEQ,
+ACK, TTL, Okno, ...) a takÅ¼e ich zawartoÅ›Ä‡ w rÃ³Å¼nych formatach
 (szesnastkowo lub w czystej postaci, ...).
 
-%description -l pt_BR
-Sniffit é um analisador de redes. Ele monitora o tráfego de rede e
-produz uma análise compreensível por humanos.
+%description -l pt_BR.UTF-8
+Sniffit Ã© um analisador de redes. Ele monitora o trÃ¡fego de rede e
+produz uma anÃ¡lise compreensÃ­vel por humanos.
 
 %prep
 %setup -q -n %{name}.%{version}.beta
