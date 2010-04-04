@@ -4,7 +4,7 @@ Summary(pl.UTF-8):	Program do nasłuchu połączeń TCP/UDP/ICMP
 Summary(pt_BR.UTF-8):	Um analisador de protocolos de rede
 Name:		sniffit
 Version:	0.3.7
-Release:	10
+Release:	11
 Epoch:		1
 License:	distributable
 Group:		Networking/Utilities
@@ -13,6 +13,7 @@ Source0:	http://reptile.rug.ac.be/~coder/sniffit/files/%{name}.%{version}.beta.t
 Patch0:		%{name}-fixes.patch
 Patch1:		%{name}-gcc33.patch
 Patch2:		%{name}-am18.patch
+Patch3:		system-libpcap.patch
 URL:		http://reptile.rug.ac.be/~coder/sniffit/sniffit.html
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -47,15 +48,10 @@ produz uma análise compreensível por humanos.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
+%{__sed} -i -e '/strip/d' Makefile.in
 
 %build
-cd libpcap
-cp -f /usr/share/automake/config.sub .
-mv -f aclocal.m4 acinclude.m4
-%{__aclocal}
-%{__autoconf}
-cd ..
-
 cp -f /usr/share/automake/config.sub .
 %{__aclocal}
 %{__autoconf}
@@ -65,11 +61,9 @@ cp -f /usr/share/automake/config.sub .
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_bindir},%{_mandir}/man{5,8}}
-
-install sniffit $RPM_BUILD_ROOT%{_bindir}
-
-install sniffit.5 $RPM_BUILD_ROOT%{_mandir}/man5
-install sniffit.8 $RPM_BUILD_ROOT%{_mandir}/man8
+install -p sniffit $RPM_BUILD_ROOT%{_bindir}
+cp -a sniffit.5 $RPM_BUILD_ROOT%{_mandir}/man5
+cp -a sniffit.8 $RPM_BUILD_ROOT%{_mandir}/man8
 
 %clean
 rm -rf $RPM_BUILD_ROOT
