@@ -1,0 +1,175 @@
+--- sniffit.0.3.7.beta/sn_cfgfile.c.orig	2026-03-09 15:28:45.778512611 +0100
++++ sniffit.0.3.7.beta/sn_cfgfile.c	2026-03-09 15:30:01.774564116 +0100
+@@ -3,8 +3,13 @@
+ /*   - improvements: Shudoh Kazuyuki                                      */
+ 
+ #include <stdio.h>
++#include <stdlib.h>
++#include <string.h>
++#include <ctype.h>
+ #include <netdb.h>	                           /* for getservbyname() */
+ 
++extern char *strlower (char *);
++
+ #include "sn_config.h"
+ #include "sn_defines.h"
+ #include "sn_structs.h"
+--- sniffit.0.3.7.beta/sn_logfile.c.orig	2026-03-09 15:28:45.782132263 +0100
++++ sniffit.0.3.7.beta/sn_logfile.c	2026-03-09 15:30:01.777992124 +0100
+@@ -1,5 +1,8 @@
+ /* Sniffit Logfile include file                                           */
+ /*   - by: Brecht Claerhout                                               */
++#include <stdlib.h>
++#include <string.h>
++#include <time.h>
+                      
+ #include "sn_config.h"
+ 
+@@ -90,7 +93,7 @@
+ if(LogFILE==NULL)
+   printf("Sniffit hardattack.. couldn't create/open logfile...\n"), exit(1); 
+ exit_func(logfile_exit);
+-fchmod(LogFILE,  S_IWUSR|S_IRUSR);
++fchmod(fileno(LogFILE),  S_IWUSR|S_IRUSR);
+ print_logline("Sniffit session started.");
+ printf("Sniffit Logging started.\n");
+ }
+--- sniffit.0.3.7.beta/sn_packets.c.orig	2026-03-09 15:28:45.785351430 +0100
++++ sniffit.0.3.7.beta/sn_packets.c	2026-03-09 15:30:01.781199282 +0100
+@@ -1,4 +1,5 @@
+ /* Sniffit Packet Discription File                                        */
++#include <string.h>
+ /*   - by: Brecht Claerhout                            */
+ 
+ #include "sn_config.h"
+@@ -64,11 +65,11 @@
+ 		{
+ 		sp[PROTO_HEAD+10]=0;       /* reset checksum to zero, Q&D way*/
+ 		sp[PROTO_HEAD+11]=0;             
+-		if(in_cksum((sp+PROTO_HEAD),unwrapped->IP_len) != IPhead.checksum)
++		if(in_cksum((unsigned short *)(sp+PROTO_HEAD),unwrapped->IP_len) != IPhead.checksum)
+ 			{
+ #ifdef DEBUG_ONSCREEN
+ 			printf("Packet dropped... (invalid IP chksum)\n");
+-			printf("%X   %X (len %d)\n",in_cksum((sp+PROTO_HEAD),unwrapped->IP_len),IPhead.checksum,unwrapped->IP_len);
++			printf("%X   %X (len %d)\n",in_cksum((unsigned short *)(sp+PROTO_HEAD),unwrapped->IP_len),IPhead.checksum,unwrapped->IP_len);
+ #endif
+ 			return NO_IP;
+ 			}
+--- sniffit.0.3.7.beta/sniffit.0.3.7.c.orig	2026-03-09 15:28:45.788710827 +0100
++++ sniffit.0.3.7.beta/sniffit.0.3.7.c	2026-03-09 15:30:01.788799501 +0100
+@@ -1,5 +1,8 @@
+ /* Sniffit main program file                                             */
+ /*  - by           : Brecht Claerhout                                    */
++#include <stdlib.h>
++#include <string.h>
++#include <ctype.h>
+ 
+ #include "sn_config.h"		/* Config header file */
+ 
+@@ -96,7 +99,7 @@
+ void close_dumpfile(void) {pcap_dump_close(dev_dump);};
+ void close_pcapdev(void) {pcap_close(dev_desc);};
+ 
+-void my_exit (void)
++void my_exit (int dummy __attribute__((unused)))
+ {
+   fflush(NULL);
+   printf("Gracefull shutdown...\n");
+@@ -473,7 +476,7 @@
+ 
+ int
+ check_packet (_32_bit ipaddr,
+-	      const struct packetheader *p_header,
++	      const struct pcap_pkthdr *p_header,
+ 	      const unsigned char *sp,
+ 	      char *file,
+ 	      char *file2,
+@@ -1065,9 +1068,9 @@
+ }
+ 
+ /* Default Processing of packets */
+-pcap_handler
++void
+ packethandler (unsigned char *ipaddrpoint,
+-	       const struct packetheader * p_header,
++	       const struct pcap_pkthdr * p_header,
+ 	       const unsigned char *sp)
+ {
+   char filename[50], filename2[50], header[SNAPLEN];
+@@ -1374,7 +1377,7 @@
+ 
+ #ifdef INCLUDE_INTERFACE	/* Interactive packethandling */
+ int
+-check_mask (const struct packetheader *p_header,
++check_mask (const struct pcap_pkthdr *p_header,
+ 	    const unsigned char *sp,
+ 	    char *conn_name, char *conn_name2, char *desc_string,
+ 	    struct unwrap *info)
+@@ -1465,9 +1468,9 @@
+   return TCP_EXAMINE;		/* interprete packet */
+ }
+ 
+-pcap_handler
++void
+ interactive_packethandler (char *dummy,
+-			   const struct packetheader * p_header,
++			   const struct pcap_pkthdr * p_header,
+ 			   const unsigned char *sp)
+ {
+   char conn_name[CONN_NAMELEN], conn_name2[CONN_NAMELEN];
+--- sniffit.0.3.7.beta/sniffit.h.orig	2026-03-09 15:28:45.792009756 +0100
++++ sniffit.0.3.7.beta/sniffit.h	2026-03-09 15:30:01.796406575 +0100
+@@ -5,14 +5,14 @@
+ 
+ /**** Sniffit functions *****************************************************/ 
+ int check_packet(_32_bit,
+-                const struct packetheader *,
++                const struct pcap_pkthdr *,
+                 const unsigned char *,char *, char *,
+                 struct unwrap *,char *,int);          
+-pcap_handler packethandler(unsigned char *,const struct packetheader *,
++void packethandler(unsigned char *,const struct pcap_pkthdr *,
+ 							const unsigned char *);
+-int check_mask (const struct packetheader *,const unsigned char *, char *,
++int check_mask (const struct pcap_pkthdr *,const unsigned char *, char *,
+     	                                      char *, char *, struct unwrap *);
+-pcap_handler interactive_packethandler( char *, const struct packetheader *,
++void interactive_packethandler( char *, const struct pcap_pkthdr *,
+                                         const unsigned char *);     
+ void print_iphead (struct IP_header *, char);
+ void quit (char *);
+@@ -24,7 +24,7 @@
+ void sb_shift(struct file_info *); 
+ void sbuf_update(struct file_info *, _32_bit, char *, int);
+ struct file_info *search_dynam(char *, char);
+-void my_exit (void);
++void my_exit (int);
+ 
+ /**** Sniffit functions (plugins) *******************************************/ 
+ void start_plugin (int, struct Plugin_data *);
+--- sniffit.0.3.7.beta/sn_interface.h.orig	2026-03-09 15:28:45.795908385 +0100
++++ sniffit.0.3.7.beta/sn_interface.h	2026-03-09 15:30:01.799809338 +0100
+@@ -27,9 +27,9 @@
+ void set_signal (int, sig_hand);
+ void sig_blocking(char, int);
+ void stop_logging (void);
+-int check_mask (const struct packetheader *,const unsigned char *, char *, 
++int check_mask (const struct pcap_pkthdr *,const unsigned char *, char *, 
+                                             char *, char *, struct unwrap *);
+-pcap_handler interactive_packethandler( char *, const struct packetheader *,
++void interactive_packethandler( char *, const struct pcap_pkthdr *,
+                  		        const unsigned char *);
+ void stop_packet_info (void);
+ void packet_info_handler (int);
+--- sniffit.0.3.7.beta/dns_plugin.plug.orig	2026-03-09 15:32:40.491491673 +0100
++++ sniffit.0.3.7.beta/dns_plugin.plug	2026-03-09 15:32:40.494758348 +0100
+@@ -84,7 +84,7 @@
+ len=PLD->PL_info.IP_len + PLD->PL_info.UDP_len + PLD->PL_info.DATA_len;
+ dns_iphead= (struct IP_header *) dns_buffer;
+ dns_udphead= (struct UDP_header *) (dns_buffer+udp_start);
+-dns_dnshead= (struct DNS_header *) (dns_buffer+udp_start+sizeof(struct UDP_header));
++dns_dnshead= (struct PL_DNS_header *) (dns_buffer+udp_start+sizeof(struct UDP_header));
+ 
+ PL_pos_max = PLD->PL_info.DATA_len - 12;
+ 
